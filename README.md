@@ -23,4 +23,4 @@ The SDK is distributed under BSD-2-Clause, while upstream demo applications (inc
 
 ## Current status
 
-This repository was initially empty. The source import and modernization are in progress; do not treat this README alone as a buildable application.
+The complete upstream SDK and legacy frame-grabber are tracked at `upstream/` as a Git submodule pinned to the reference commit. This keeps the upstream history and all source/resource files intact without silently rewriting upstream files. Initialize it with `git clone --recurse-submodules https://github.com/raulno1events-glitch/framegrabber.git`, or run `git submodule update --init --recursive` after cloning. The modernization work belongs in this repository outside `upstream/`.
