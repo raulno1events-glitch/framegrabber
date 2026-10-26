@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Framegrabber — Scan Console</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1017;--panel:#111923;--panel2:#151f2b;--line:#263443;--muted:#8292a5;--text:#e9f0f7;--cyan:#56e0d0;--blue:#7aa7ff;--amber:#ffc66d;--red:#ff7d86;--green:#72e2a5}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 48% -15%,#1b3441 0,transparent 44%),var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:9px;background:#1b2735;color:var(--text);padding:10px 13px;transition:.15s}button:hover{border-color:#526d83;background:#223345}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.primary{background:var(--cyan);border-color:var(--cyan);color:#06211f;font-weight:750}.primary:hover{background:#7aefe1}.danger{color:#ffadb3}.app{max-width:1600px;margin:auto;padding:22px;display:grid;gap:18px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;gap:12px;align-items:center}.logo{width:42px;height:42px;border:1px solid #365a65;border-radius:13px;display:grid;place-items:center;background:#102b32;color:var(--cyan)}.brand h1{font-size:18px;letter-spacing:.01em;margin:0}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}.top-actions{display:flex;align-items:center;gap:10px}.pill{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:99px;padding:7px 11px;color:var(--muted);font-size:12px}.dot{width:7px;height:7px;border-radius:50%;background:var(--muted)}.dot.green{background:var(--green);box-shadow:0 0 12px #72e2a566}.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}.left{display:grid;gap:18px;min-width:0}.panel{border:1px solid var(--line);border-radius:16px;background:linear-gradient(145deg,#141e29,#101720);overflow:hidden;box-shadow:0 12px 35px #0002}.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}.panel-head h2{margin:0;font-size:14px;font-weight:700}.panel-head p{margin:4px 0 0;color:var(--muted);font-size:12px}.head-right{display:flex;align-items:center;gap:8px}.tiny{font-size:11px;color:var(--muted)}.scan-wrap{position:relative;padding:12px;min-height:420px;background:radial-gradient(ellipse at center,#14232b 0,#0b121a 70%)}canvas{width:100%;height:420px;display:block}.scan-legend{display:flex;gap:16px;align-items:center;padding:0 18px 15px;color:var(--muted);font-size:11px}.legend-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;background:var(--cyan)}.legend-dot.blue{background:var(--blue)}.overlay{position:absolute;top:22px;left:24px;display:flex;gap:8px;flex-wrap:wrap}.metric{background:#0c151ddd;border:1px solid #263946;border-radius:8px;padding:7px 10px;font-size:11px;color:#9fb2c2}.metric b{color:var(--text);font-size:13px;margin-right:4px}.bottom-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:14px 15px}.stat label{font-size:11px;color:var(--muted);display:block;margin-bottom:7px}.stat strong{font-size:21px;letter-spacing:-.03em;font-weight:650}.stat small{font-size:11px;color:var(--muted);margin-left:5px}.side{display:grid;gap:18px}.section{padding:17px 18px}.field{display:grid;gap:7px;margin-bottom:14px}.field:last-child{margin-bottom:0}.field label{color:#b8c5d2;font-size:12px}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:9px;background:#0b121a;color:var(--text);padding:10px 11px}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.rowline{display:flex;justify-content:space-between;align-items:center;gap:12px}.switch{position:relative;width:38px;height:22px;border-radius:99px;background:#344454;border:0;padding:0;flex:none}.switch:after{content:"";position:absolute;width:16px;height:16px;left:3px;top:3px;background:#dce5ed;border-radius:50%;transition:.15s}.switch[aria-checked=true]{background:#1c8c83}.switch[aria-checked=true]:after{left:19px;background:white}.control-list{display:grid;gap:14px}.range{width:100%;accent-color:var(--cyan)}.button-row{display:flex;gap:8px}.button-row button{flex:1}.divider{height:1px;background:var(--line);margin:15px 0}.status-line{display:flex;align-items:center;gap:9px;color:var(--muted);font-size:12px}.status-line strong{color:var(--text);font-weight:600}.log{display:grid;gap:10px;padding:15px 18px}.log-entry{display:grid;grid-template-columns:54px 1fr;gap:10px;font-size:11px;color:var(--muted)}.log-entry time{font-variant-numeric:tabular-nums;color:#62788b}.log-entry strong{font-weight:550;color:#c5d1dc}.log-entry .ok{color:var(--green)}.log-entry .warn{color:var(--amber)}.footer{display:flex;justify-content:space-between;gap:12px;color:#647689;font-size:11px;padding:0 2px}.notice{border:1px solid #66512d;background:#2b2418;color:#eacb8f;padding:11px 13px;border-radius:10px;font-size:12px}.hidden{display:none!important}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.side{grid-template-columns:repeat(2,minmax(0,1fr))}.bottom-stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.app{padding:12px}.topbar{align-items:flex-start;flex-direction:column}.top-actions{width:100%;justify-content:space-between}.side{grid-template-columns:1fr}.scan-wrap{min-height:320px}canvas{height:320px}.bottom-stats{gap:8px}.stat{padding:11px}.stat strong{font-size:18px}.footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div class="logo" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v5M22 12h-5M12 22v-5M2 12h5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg></div><div><h1>Framegrabber <span style="color:var(--muted);font-weight:450">/ Scan Console</span></h1><div class="eyebrow">RPLIDAR control workspace</div></div></div>
+  <div class="top-actions"><span class="pill"><span id="connectionDot" class="dot"></span><span id="connectionText">Disconnected</span></span><button id="connectBtn" class="primary">Connect device</button></div>
+</header>
+<div class="notice" id="demoNotice">Preview mode — scan points are simulated. This prototype is not connected to a physical RPLIDAR and does not send mouse or TUIO events.</div>
+<div class="layout">
+<main class="left">
+<section class="panel">
+  <div class="panel-head"><div><h2>Live scan</h2><p>Polar range view · top-down sensor coordinates</p></div><div class="head-right"><span class="pill"><span class="dot green" id="scanDot"></span><span id="scanState">Preview paused</span></span><button id="fitBtn">Fit view</button></div></div>
+  <div class="scan-wrap"><canvas id="scanCanvas" aria-label="Simulated RPLIDAR polar scan visualization"></canvas><div class="overlay"><span class="metric"><b id="pointCount">0</b>points</span><span class="metric"><b id="fps">0</b>Hz</span><span class="metric">Range <b id="rangeLabel">8.0 m</b></span></div></div>
+  <div class="scan-legend"><span><i class="legend-dot"></i>Range returns</span><span><i class="legend-dot blue"></i>Filtered cluster</span><span>· Demo data</span></div>
+</section>
+<div class="bottom-stats">
+  <div class="stat"><label>Scan frequency</label><strong id="freqStat">10.0</strong><small>Hz</small></div>
+  <div class="stat"><label>Points / revolution</label><strong id="pointsStat">720</strong><small>pts</small></div>
+  <div class="stat"><label>Closest return</label><strong id="closestStat">1.24</strong><small>m</small></div>
+  <div class="stat"><label>Session time</label><strong id="sessionStat">00:00</strong></div>
+</div>
+<section class="panel"><div class="panel-head"><div><h2>Event log</h2><p>Connection and scan lifecycle</p></div><button id="clearLog">Clear log</button></div><div class="log" id="eventLog"><div class="log-entry"><time>--:--:--</time><div><strong>Ready.</strong> Choose a connection and start the preview.</div></div></div></section>
+</main>
+<aside class="side">
+<section class="panel"><div class="panel-head"><div><h2>Device connection</h2><p>Transport and device parameters</p></div></div><div class="section">
+  <div class="field"><label for="transport">Transport</label><select id="transport"><option value="serial">Serial / USB</option><option value="tcp">TCP</option><option value="udp">UDP</option></select></div>
+  <div id="serialFields"><div class="field"><label for="port">Serial port</label><select id="port"><option>COM3</option><option>COM4</option><option>COM5</option><option>COM6</option></select></div><div class="field"><label for="baud">Baud rate</label><select id="baud"><option>115200</option><option selected>1000000</option><option>256000</option><option>460800</option></select></div></div>
+  <div id="networkFields" class="hidden"><div class="field"><label for="host">Host / IP address</label><input id="host" value="192.168.11.2" spellcheck="false"></div><div class="field"><label for="portNum">Port</label><input id="portNum" type="number" value="8089" min="1" max="65535"></div></div>
+  <div class="button-row"><button id="disconnectBtn" disabled>Disconnect</button><button id="testBtn">Test settings</button></div>
+</div></section>
+<section class="panel"><div class="panel-head"><div><h2>Scan controls</h2><p>Preview parameters</p></div></div><div class="section control-list">
+  <div class="field"><label for="rangeSlider" class="rowline"><span>Maximum range</span><strong id="rangeValue">8.0 m</strong></label><input id="rangeSlider" class="range" type="range" min="1" max="28" step=".5" value="8"></div>
+  <div class="field"><label for="freqSlider" class="rowline"><span>Display refresh</span><strong id="freqValue">10 Hz</strong></label><input id="freqSlider" class="range" type="range" min="2" max="20" step="1" value="10"></div>
+  <div class="rowline"><div><strong style="font-size:12px">Noise filter</strong><div class="tiny">Hide low-confidence returns</div></div><button class="switch" id="filterSwitch" role="switch" aria-checked="true" aria-label="Noise filter"></button></div>
+  <div class="rowline"><div><strong style="font-size:12px">Show range rings</strong><div class="tiny">Display distance guides</div></div><button class="switch" id="ringsSwitch" role="switch" aria-checked="true" aria-label="Show range rings"></button></div>
+  <div class="divider"></div><div class="button-row"><button id="startBtn" class="primary">Start preview</button><button id="stopBtn" disabled>Stop</button></div>
+</div></section>
+<section class="panel"><div class="panel-head"><div><h2>Input / output</h2><p>Integration status</p></div></div><div class="section control-list">
+  <div class="rowline"><div><strong style="font-size:12px">Mouse emulation</strong><div class="tiny">Windows pointer injection</div></div><span class="pill">Not connected</span></div>
+  <div class="rowline"><div><strong style="font-size:12px">TUIO / OSC</strong><div class="tiny">UDP output · port 3333</div></div><span class="pill">Not connected</span></div>
+  <div class="rowline"><div><strong style="font-size:12px">Touch mapping</strong><div class="tiny">Area and calibration</div></div><button id="mappingBtn">Configure</button></div>
+</div></section>
+</aside>
+</div>
+<footer class="footer"><span>Framegrabber UI prototype · hardware integration not enabled</span><span>RPLIDAR · Serial / TCP / UDP concepts</span></footer>
+</div>
+<script>
+(()=> {
+const $=id=>document.getElementById(id), canvas=$('scanCanvas'), ctx=canvas.getContext('2d');
+let connected=false,running=false,filter=true,rings=true,range=8,freq=10,startedAt=0,elapsedBase=0,lastDraw=0,raf=0,sessionTimer=null;
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function log(message,kind=''){const d=document.createElement('div');d.className='log-entry';const t=new Date().toLocaleTimeString('en-GB',{hour12:false});d.innerHTML='<time></time><div></div>';d.firstChild.textContent=t;const strong=document.createElement('strong');strong.textContent=message; if(kind)strong.className=kind;d.lastChild.append(strong,document.createTextNode(kind==='warn'?' Check the configuration; this is still preview-only.':''));$('eventLog').prepend(d);while($('eventLog').children.length>5)$('eventLog').lastElementChild.remove()}
+function setConnection(value){connected=value;$('connectionText').textContent=value?'Preview connected':'Disconnected';$('connectionDot').className='dot'+(value?' green':'');$('connectBtn').textContent=value?'Disconnect preview':'Connect device';$('connectBtn').classList.toggle('primary',!value);$('disconnectBtn').disabled=!value;if(value)log('Preview connection established','ok');else {running=false;updateScanButtons();log('Preview disconnected')}}
+function updateScanButtons(){$('startBtn').disabled=running;$('stopBtn').disabled=!running;$('scanState').textContent=running?'Preview running':'Preview paused';$('scanDot').className='dot'+(running?' green':'')}
+function toggleSwitch(el){const val=el.getAttribute('aria-checked')!=='true';el.setAttribute('aria-checked',String(val));return val}
+function resize(){const rect=canvas.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=Math.max(1,Math.floor(rect.width*dpr));canvas.height=Math.max(1,Math.floor(rect.height*dpr));ctx.setTransform(dpr,0,0,dpr,0,0);draw(performance.now())}
+function draw(now=performance.now()){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;ctx.clearRect(0,0,w,h);const cx=w/2,cy=h/2+8,r=Math.min(w*.43,h*.43);ctx.fillStyle='#0a1219';ctx.fillRect(0,0,w,h);
+if(rings){for(let i=1;i<=4;i++){ctx.beginPath();ctx.arc(cx,cy,r*i/4,0,Math.PI*2);ctx.strokeStyle='#243640';ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='#78909e';ctx.font='10px ui-sans-serif';ctx.fillText((range*i/4).toFixed(range<10?1:0)+'m',cx+5,cy-r*i/4+12)}}
+for(let i=0;i<8;i++){const a=i*Math.PI/4;ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*r,cy+Math.sin(a)*r);ctx.strokeStyle='#1d2e39';ctx.stroke()}
+ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#56e0d0';ctx.fill();ctx.beginPath();ctx.arc(cx,cy,11,0,Math.PI*2);ctx.strokeStyle='#56e0d055';ctx.stroke();
+const t=now/1000;let n=0,closest=range;const wobble=running&&!reduced?Math.sin(t*.7)*.03:0;
+for(let i=0;i<720;i++){const a=i*Math.PI*2/720;const deg=a*180/Math.PI;let d=range*(.66+.1*Math.sin(a*3+.4)+.06*Math.cos(a*7-1));if(deg>18&&deg<76)d=range*(.34+.025*Math.sin(a*31));if(deg>105&&deg<147)d=range*(.52+.035*Math.cos(a*19));if(deg>205&&deg<250)d=range*(.79+.04*Math.sin(a*13));if(deg>284&&deg<335)d=range*(.44+.03*Math.cos(a*25));d+=wobble*range*Math.sin(a*5);if(running)d+=Math.sin(t*1.4+a*8)*.025*range;if(filter&&((i*17)%31===0||(i*7)%47===0))continue;d=Math.max(.25,Math.min(range,d));closest=Math.min(closest,d);const rr=d/r;const x=cx+Math.cos(a)*r*rr,y=cy+Math.sin(a)*r*rr;const cluster=(deg>18&&deg<76)||(deg>284&&deg<335);ctx.fillStyle=cluster?'#7aa7ff':'#56e0d0';ctx.globalAlpha=.52+.48*((i%5)/4);ctx.beginPath();ctx.arc(x,y,cluster?1.65:1.35,0,Math.PI*2);ctx.fill();n++}
+ctx.globalAlpha=1;ctx.fillStyle='#9bb1c0';ctx.font='10px ui-sans-serif';ctx.fillText('0°',cx+14,cy-13);ctx.fillText('90°',cx+r+5,cy+3);ctx.fillText('180°',cx-15,cy+r+15);ctx.fillText('270°',cx-r-28,cy+3);
+$('pointCount').textContent=n;$('fps').textContent=running?freq:0;$('closestStat').textContent=closest.toFixed(2);if(running){raf=requestAnimationFrame(draw)}}
+function updateRange(){range=Number($('rangeSlider').value);$('rangeValue').textContent=range.toFixed(1)+' m';$('rangeLabel').textContent=range.toFixed(1)+' m';draw()}
+function updateFreq(){freq=Number($('freqSlider').value);$('freqValue').textContent=freq+' Hz';$('freqStat').textContent=freq.toFixed(1);if(running){cancelAnimationFrame(raf);draw()}}
+function updateSession(){const s=elapsedBase+(running?(Date.now()-startedAt)/1000:0);$('sessionStat').textContent=String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0')}
+$('transport').addEventListener('change',()=>{const net=$('transport').value!=='serial';$('networkFields').classList.toggle('hidden',!net);$('serialFields').classList.toggle('hidden',net)});
+$('connectBtn').addEventListener('click',()=>{if(connected){setConnection(false);return}log('Hardware transport is not wired in this prototype','warn');setConnection(true);$('demoNotice').textContent='Preview mode — connection state is simulated. No physical device was opened.'});
+$('disconnectBtn').addEventListener('click',()=>setConnection(false));
+$('testBtn').addEventListener('click',()=>log('Settings format looks valid; no device test was performed','warn'));
+$('startBtn').addEventListener('click',()=>{if(!connected){log('Connect the preview first','warn');return}running=true;startedAt=Date.now();updateScanButtons();log('Scan preview started','ok');draw()});
+$('stopBtn').addEventListener('click',()=>{running=false;elapsedBase+=(Date.now()-startedAt)/1000;cancelAnimationFrame(raf);updateScanButtons();updateSession();draw();log('Scan preview stopped')});
+$('rangeSlider').addEventListener('input',updateRange);$('freqSlider').addEventListener('input',updateFreq);
+$('filterSwitch').addEventListener('click',()=>{filter=toggleSwitch($('filterSwitch'));draw()});$('ringsSwitch').addEventListener('click',()=>{rings=toggleSwitch($('ringsSwitch'));draw()});
+$('fitBtn').addEventListener('click',()=>{range=8;$('rangeSlider').value='8';updateRange();log('View range reset to 8 m')});
+$('clearLog').addEventListener('click',()=>{$('eventLog').replaceChildren();log('Event log cleared')});
+$('mappingBtn').addEventListener('click',()=>{log('Calibration UI is planned; mapping is not active','warn');alert('Touch mapping is not implemented in this UI prototype. The original app configuration needs to be integrated before enabling mouse/TUIO output.')});
+window.addEventListener('resize',resize);window.addEventListener('beforeunload',()=>cancelAnimationFrame(raf));resize();updateRange();updateFreq();updateScanButtons();sessionTimer=setInterval(updateSession,500);
+})();
+</script>
+</body></html>
