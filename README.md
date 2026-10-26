@@ -24,3 +24,8 @@ The SDK is distributed under BSD-2-Clause, while upstream demo applications (inc
 ## Current status
 
 The complete upstream SDK and legacy frame-grabber are tracked at `upstream/` as a Git submodule pinned to the reference commit. This keeps the upstream history and all source/resource files intact without silently rewriting upstream files. Initialize it with `git clone --recurse-submodules https://github.com/raulno1events-glitch/framegrabber.git`, or run `git submodule update --init --recursive` after cloning. The modernization work belongs in this repository outside `upstream/`.
+
+
+## UI prototype
+
+Open [the interactive scan console prototype](prototype/index.html) in a browser. It demonstrates the intended layout, polar scan visualization, connection settings, scan controls, and event log using simulated data. It is a UI prototype only: it does **not** communicate with physical RPLIDAR hardware and does not send mouse or TUIO events.
